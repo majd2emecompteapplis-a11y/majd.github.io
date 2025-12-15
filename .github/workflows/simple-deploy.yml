@@ -17,9 +17,7 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           # create orphan branch and replace contents
           git switch --orphan gh-pages
-          git reset --hard
-          git rm -rf . || true
-          cp -r ../majd.github.io/. . || true
+          # keep working tree files and commit them to the orphan branch
           git add -A
-          git commit -m "Deploy to gh-pages" || echo "No changes"
-          git push --force "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" gh-pages
+          git commit -m "Deploy to gh-pages" || echo "No changes to deploy"
+          git push --force "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:gh-pages
