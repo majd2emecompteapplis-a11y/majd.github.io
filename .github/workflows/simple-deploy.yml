@@ -16,8 +16,10 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           # create orphan branch and replace contents
-          git switch --orphan gh-pages
-          # keep working tree files and commit them to the orphan branch
+          # create or reset a worktree for gh-pages and copy files there
+          git worktree add -B gh-pages ../gh-pages || true
+          rsync -a --delete --exclude '.git' ./ ../gh-pages/
+          cd ../gh-pages
           git add -A
           git commit -m "Deploy to gh-pages" || echo "No changes to deploy"
-          git push --force "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:gh-pages
+          git push --force "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" gh-pages:gh-pages
