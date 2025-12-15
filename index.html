@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Mon jeu</title>
+<style>
+body {
+  background: #111;
+  color: white;
+  text-align: center;
+  font-family: Arial;
+}
+button {
+  padding: 15px;
+  font-size: 20px;
+  cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+<h1>🎮 Mon jeu</h1>
+<p>Clique pour jouer</p>
+<button onclick="jouer()">Jouer</button>
+<p id="msg"></p>
+
+<script>
+function jouer() {
+  document.getElementById("msg").textContent =
+    "Bravo ! Le jeu fonctionne 😎";
+}
+</script>
+
+</body>
+</html>
+git add .
+git commit -m "Publier site"
+git push origin main
+git status
+git remote -v
